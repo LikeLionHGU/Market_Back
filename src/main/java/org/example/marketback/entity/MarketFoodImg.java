@@ -1,5 +1,4 @@
 package org.example.marketback.entity;
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,7 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class History {
+public class MarketFoodImg {
 
     @Id
     private Long id;
@@ -17,8 +16,7 @@ public class History {
     @OneToOne
     @MapsId
     @JoinColumn(name = "id")
-    private Market market;
+    private Market store;
 
-    private String content;
-
+    private String imgUrl;
 }

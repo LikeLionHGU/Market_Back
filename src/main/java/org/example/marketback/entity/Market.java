@@ -2,7 +2,6 @@ package org.example.marketback.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,27 +11,19 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Market {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Market extends AuditingFields {
 
     private String name;
+    private String location;
 
-    private String history;
+    @OneToOne(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+    private MarketFoodImg foodMenuImg;
 
-    private String address;
-
-    private String contact;
-
-    @OneToMany(mappedBy = "market", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<WorkingDate> dates = new ArrayList<>();
+    @OneToOne(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+    private History history;
 
 
     @OneToMany(mappedBy = "market", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Image> images = new ArrayList<>();
-
-    @OneToMany(mappedBy = "market", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<History> historyList = new ArrayList<>();
+    private List<Tmi> tmiList = new ArrayList<>();
 
 }

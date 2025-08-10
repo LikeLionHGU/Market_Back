@@ -9,16 +9,11 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class History {
-
-    @Id
-    private Long id;
-
-    @OneToOne
-    @MapsId
-    @JoinColumn(name = "id")
-    private Market market;
-
+public class Tmi extends AuditingFields {
+    
     private String content;
-
+    
+    @ManyToOne
+    @JoinColumn(name = "market_id")
+    private Market market;
 }

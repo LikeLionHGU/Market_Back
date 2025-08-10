@@ -5,10 +5,12 @@ import org.example.marketback.dto.MarketDetailDto;
 import org.example.marketback.dto.MarketSummaryDto;
 import org.example.marketback.dto.TMIDto;
 import org.example.marketback.entity.Market;
+import org.example.marketback.repository.HistoryRepository;
 import org.example.marketback.repository.MarketRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,6 +20,7 @@ import java.util.stream.Collectors;
 public class MarketService {
     
     private final MarketRepository marketRepository;
+    private final HistoryRepository historyRepository;
     
     public List<MarketSummaryDto> getAllMarkets() {
         return marketRepository.findAll().stream()
@@ -25,41 +28,13 @@ public class MarketService {
                 .collect(Collectors.toList());
     }
     
+    @Transactional
     public MarketDetailDto getMarketDetail(Long marketId) {
         Market market = marketRepository.findById(marketId)
                 .orElseThrow(() -> new RuntimeException("Market not found with id: " + marketId));
         
-        return convertToDetailDto(market);
-    }
-    
-    private MarketSummaryDto convertToSummaryDto(Market market) {
-        List<String> imageUrls = market.getImages().stream()
-                .map(image -> image.getImageURL())
-                .collect(Collectors.toList());
-        
-        return MarketSummaryDto.builder()
-                .id(market.getId())
-                .name(market.getName())
-                .address(market.getAddress())
-                .contact(market.getContact())
-                .imageUrls(imageUrls)
-                .build();
-    }
-    
-    private MarketDetailDto convertToDetailDto(Market market) {
-        List<String> imageUrls = market.getImages().stream()
-                .map(image -> image.getImageURL())
-                .collect(Collectors.toList());
-        
-        List<MarketDetailDto.WorkingDateDto> workingDates = market.getDates().stream()
-                .map(wd -> MarketDetailDto.WorkingDateDto.builder()
-                        .day(wd.getDay())
-                        .start(wd.getStart())
-                        .end(wd.getEnd())
-                        .build())
-                .collect(Collectors.toList());
-        
-        List<TMIDto> tmiList = market.getHistoryList().stream()
+        // Get TMI list separately
+        List<TMIDto> tmiList = historyRepository.findByMarketIdOrderByHistoryIdDesc(marketId).stream()
                 .map(history -> TMIDto.builder()
                         .historyId(history.getHistoryId())
                         .content(history.getContent())
@@ -75,9 +50,19 @@ public class MarketService {
                 .history(market.getHistory())
                 .address(market.getAddress())
                 .contact(market.getContact())
-                .imageUrls(imageUrls)
-                .workingDates(workingDates)
+                .imageUrls(new ArrayList<>()) // Empty for now
+                .workingDates(new ArrayList<>()) // Empty for now
                 .tmiList(tmiList)
+                .build();
+    }
+    
+    private MarketSummaryDto convertToSummaryDto(Market market) {
+        return MarketSummaryDto.builder()
+                .id(market.getId())
+                .name(market.getName())
+                .address(market.getAddress())
+                .contact(market.getContact())
+                .imageUrls(new ArrayList<>()) // Empty for now
                 .build();
     }
 }

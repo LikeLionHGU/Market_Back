@@ -17,9 +17,11 @@ public class History {
 
     private String content;
 
-    private int countLike=0;
+    @Builder.Default
+    private int countLike = 0;
 
-    private long viewCount=0;
+    @Builder.Default
+    private long viewCount = 0;
 
 
     @ManyToOne(fetch = FetchType.LAZY)

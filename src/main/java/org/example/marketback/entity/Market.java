@@ -26,13 +26,15 @@ public class Market {
     private String contact;
 
     @OneToMany(mappedBy = "market", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<WorkingDate> dates = new ArrayList<>();
 
-
     @OneToMany(mappedBy = "market", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<Image> images = new ArrayList<>();
 
     @OneToMany(mappedBy = "market", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
     private List<History> historyList = new ArrayList<>();
 
 }

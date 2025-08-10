@@ -25,6 +25,7 @@ public class Market extends AuditingFields {
     @OneToOne(mappedBy = "market", cascade = CascadeType.ALL, orphanRemoval = true)
     private History history;
 
+    @Builder.Default
     @OneToMany(mappedBy = "market", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tmi> tmiList = new ArrayList<>();
 

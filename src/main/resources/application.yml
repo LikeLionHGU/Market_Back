@@ -11,7 +11,7 @@ spring:
         model: gpt-4.1-nano
         options:
           temperature: 0.5
-          max-completion-tokens: 480
+          max-tokens: 480
 
   jpa:
     open-in-view: false
@@ -25,6 +25,9 @@ spring:
       enabled: true
       max-file-size: 5MB
       max-request-size: 10MB
+
+  profiles:
+    active: dev
 
 # AWS ??
 cloud:
@@ -69,9 +72,10 @@ server:
 ---
 # ?? ?? ??
 spring:
-  profiles: dev
   config:
     import: optional:file:.env[.properties]
+    activate:
+      on-profile: dev
 
   # ?????? ?? (????? mysql ??)
   jpa:
@@ -136,7 +140,9 @@ management:
 ---
 # docker == production mode
 spring:
-  profiles: prod
+  config:
+    activate:
+      on-profile: prod
 
   # DB -> ??/???
   jpa:
@@ -205,7 +211,7 @@ server:
       max: 200
       min-spare: 10
     max-connections: 8192
-    accept-count: 200
+    accept-count: 500
     connection-timeout: 20000
   compression:
     enabled: true

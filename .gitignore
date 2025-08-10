@@ -1,11 +1,28 @@
-HELP.md
-.gradle
+# ====================
+# Build & Dependencies
+# ====================
+.gradle/
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
+out/
+!**/src/main/**/out/
+!**/src/test/**/out/
+bin/
+!**/src/main/**/bin/
+!**/src/test/**/bin/
 
-### STS ###
+# ====================
+# IDE & Editors
+# ====================
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+
+# Eclipse/STS
 .apt_generated
 .classpath
 .factorypath
@@ -13,29 +30,143 @@ build/
 .settings
 .springBeans
 .sts4-cache
-bin/
-!**/src/main/**/bin/
-!**/src/test/**/bin/
 
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-out/
-!**/src/main/**/out/
-!**/src/test/**/out/
-
-### NetBeans ###
+# NetBeans
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
 
-### VS Code ###
+# VS Code
 .vscode/
+*.code-workspace
 
+# ====================
+# QueryDSL Generated
+# ====================
+/src/main/generated/
+**/Q*.java
+
+# ====================
+# Environment & Config
+# ====================
 .env
-.dockerignore
-Dockerfile
+.env.local
+.env.production
+.env.development
+*.env
+
+# ====================
+# Docker (일반적으로 추적함)
+# ====================
+Dockerfile     # 보통 버전 관리에 포함 (차후 추가 예정)
+
+# ====================
+# Logs & Temp Files
+# ====================
+*.log
+*.log.*
+logs/
+/logs
+temp/
+tmp/
+*.tmp
+*.temp
+
+# ====================
+# Application Files
+# ====================
+uploads/
+/uploads
+download/
+/download
+*.jar
+*.war
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# ====================
+# Security & Secrets
+# ====================
+*.pem
+*.key
+*.crt
+*.p12
+*.jks
+keystore/
+truststore/
+secrets/
+credentials/
+
+# ====================
+# OS Files
+# ====================
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+.directory
+.Trash-*
+
+# ====================
+# Database
+# ====================
+*.db
+*.sqlite
+*.sqlite3
+*.h2.db
+*.trace.db
+
+# ====================
+# Documentation
+# ====================
+HELP.md
+
+# ====================
+# Test & Coverage
+# ====================
+coverage/
+.nyc_output/
+*.coverage
+.coverage.*
+htmlcov/
+*.cover
+
+# ====================
+# Node (프론트엔드 연동 시)
+# ====================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# ====================
+# Backup Files
+# ====================
+*.bak
+*.backup
+*.old
+*.orig
+*~
+
+# ====================
+# JetBrains
+# ====================
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf

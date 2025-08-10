@@ -12,7 +12,7 @@ import lombok.*;
 public class History {
 
     @Id
-    private Long id;
+    private String id;
 
     @OneToOne
     @MapsId

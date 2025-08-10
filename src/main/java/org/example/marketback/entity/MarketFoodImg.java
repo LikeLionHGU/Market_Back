@@ -11,7 +11,7 @@ import lombok.*;
 public class MarketFoodImg {
 
     @Id
-    private Long id;
+    private String id;
 
     @OneToOne
     @MapsId

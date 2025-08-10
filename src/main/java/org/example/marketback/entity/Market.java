@@ -19,7 +19,7 @@ public class Market extends AuditingFields {
     @OneToOne(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     private MarketFoodImg foodMenuImg;
 
-    @OneToOne(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToOne(mappedBy = "market", cascade = CascadeType.ALL, orphanRemoval = true)
     private History history;
 
     @OneToMany(mappedBy = "market", cascade = CascadeType.ALL, orphanRemoval = true)

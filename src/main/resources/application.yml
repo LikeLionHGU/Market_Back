@@ -1,0 +1,221 @@
+# ?? ?? ??
+spring:
+  application:
+    name: market-Back
+
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:${OPENAI_API_KEY_DEFAULT}}
+      base-url: https://api.openai.com
+      chat:
+        model: gpt-4.1-nano
+        options:
+          temperature: 0.5
+          max-tokens: 480
+
+  jpa:
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 5MB
+      max-request-size: 10MB
+
+  profiles:
+    active: dev
+
+  # AWS ??
+  cloud:
+    aws:
+      region:
+        static: ap-northeast-2
+      credentials:
+        accessKey: ${AWS_ACCESSKEY:${AWS_ACCESSKEY_DEFAULT}}
+        secretKey: ${AWS_SECRETKEY:${AWS_SECRETKEY_DEFAULT}}
+      s3:
+        bucket: ${AWS_BUCKET_NAME:${AWS_BUCKET_NAME_DEFAULT}}
+
+  # OAuth -> ???? ???? ???..
+  google:
+    oauth:
+      client-id: ${OAUTH_GOOGLE_CLIENT_ID:${OAUTH_GOOGLE_CLIENT_ID_DEFAULT}}
+      client-secret: ${OAUTH_GOOGLE_CLIENT_SECRET:${OAUTH_GOOGLE_CLIENT_SECRET_DEFAULT}}
+
+  # JWT ?? -> ???? ???? ???..
+  external:
+    jwt:
+      token:
+        prefix: "Bearer "
+        access-token: Authorization
+        refresh-token: Refresh-Token
+        expiration: Access-Token-Expire-Time
+      access:
+        prefix: Authorization
+        secret: ${JWT_ACCESS_SECRET:${JWT_ACCESS_SECRET_DEFAULT}}
+        expiration-ms: 900000      # 15?
+      refresh:
+        prefix: refreshToken
+        secret: ${JWT_REFRESH_SECRET:${JWT_REFRESH_SECRET_DEFAULT}}
+        expiration-ms: 604800000   # 7?
+
+  server:
+    port: 8080
+    servlet:
+      context-path: /api  # ???? ?? API ?? /api ???.
+    forward-headers-strategy: framework  # https ??
+
+---
+# ?? ?? ??
+spring:
+  config:
+    import: optional:file:.env[.properties]
+    activate:
+      on-profile: dev
+
+  # ?????? ?? (????? mysql ??)
+  jpa:
+    hibernate:
+#      ddl-auto: update
+      ddl-auto: create-drop # ???? ERD? ?? ?? ? ???..
+    defer-datasource-initialization: true
+    show-sql: true
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        dialect: org.hibernate.dialect.MySQL8Dialect
+
+  datasource:
+    url: ${DB_HOST:${DB_HOST_DEFAULT}}/${DB_NAME:${DB_NAME_DEFAULT}}
+    username: ${DB_USERNAME:${DB_USERNAME_DEFAULT}}
+    password: ${DB_PASSWORD:${DB_PASSWORD_DEFAULT}}
+    driver-class-name: ${DB_CLASSNAME:${DB_CLASSNAME_DEFAULT}}
+    show-sql: true
+    defer-datasource-initialization: true
+
+  # ?? ??? ?? (?? ?? ? sql??? ?????. - ?? ??..)
+#  sql:
+#    init:
+#      mode: always
+#      data-locations:
+#        - classpath:/sql/dev-data.sql
+
+# CORS ??
+cors:
+  allowed-origins: http://localhost:3000, ${FRONTEND_DOMAIN:https://market-frontend.netlify.app}
+
+# OAuth Redirect URI -> ??? ?? ??.
+google:
+  oauth:
+    redirect-uri: ${REDIRECT_URI:http://localhost:8080/api/auth/callback}
+
+# ?? ?? (?? ?? ???? ?? ???.)
+logging:
+  level:
+    root: INFO
+    org.example.marketback: INFO
+    org.springframework.security: DEBUG
+    org.springframework.web.servlet: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.springframework.web.client.RestTemplate: DEBUG
+    org.hibernate.type: trace
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# ????? ?? ??.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+---
+# docker == production mode
+spring:
+  config:
+    activate:
+      on-profile: prod
+
+  # DB -> ??/???
+  jpa:
+    hibernate:
+      ddl-auto: update
+    defer-datasource-initialization: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        use_sql_comments: false
+        show_sql: false
+        jdbc:
+          batch_size: 50
+          fetch_size: 100
+
+  datasource:
+    url: ${DOCKER_DB_HOST}/${DOCKER_DB_NAME}
+    username: ${DOCKER_DB_USERNAME}
+    password: ${DOCKER_DB_PASSWORD}
+    driver-class-name: ${DOCKER_DB_CLASSNAME}
+    hikari:
+      maximum-pool-size: 30
+      minimum-idle: 5
+      idle-timeout: 300000
+      max-lifetime: 1200000
+      connection-timeout: 20000
+      leak-detection-threshold: 60000
+
+cors:
+  allowed-origins: http://localhost:3000, ${FRONTEND_DOMAIN:https://market-frontend.netlify.app}
+
+# OAuth -> ??? ?? ??
+google:
+  oauth:
+    redirect-uri: ${REDIRECT_URI}
+
+# ?? ??
+logging:
+  level:
+    root: INFO
+    org.example.marketback: INFO
+    org.springframework.security: INFO
+    org.springframework.web.servlet: INFO
+    org.hibernate.type: info
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# ????
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+      probes:
+        enabled: true
+
+# ?? ??
+server:
+  tomcat:
+    threads:
+      max: 200
+      min-spare: 10
+    max-connections: 8192
+    accept-count: 500
+    connection-timeout: 20000
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024

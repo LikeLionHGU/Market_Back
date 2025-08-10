@@ -14,7 +14,10 @@ import java.util.List;
 public class Market extends AuditingFields {
 
     private String name;
-    private String location;
+    private String phoneNumber;
+    private String address;
+    private String openTime;
+    private String marketImg;
 
     @OneToOne(mappedBy = "store", cascade = CascadeType.ALL, orphanRemoval = true)
     private MarketFoodImg foodMenuImg;

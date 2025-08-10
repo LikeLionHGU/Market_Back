@@ -18,5 +18,5 @@ public class MarketFoodImg {
     @JoinColumn(name = "id")
     private Market store;
 
-    private String imgUrl;
+    private String foodImg;
 }

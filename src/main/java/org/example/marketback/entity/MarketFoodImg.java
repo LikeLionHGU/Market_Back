@@ -11,7 +11,8 @@ import lombok.*;
 public class MarketFoodImg {
 
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToOne
     @MapsId

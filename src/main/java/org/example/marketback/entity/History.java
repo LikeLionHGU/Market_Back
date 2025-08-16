@@ -9,13 +9,13 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class History {
+public class History extends Base {
 
     @Id
-    private String id;
+    private Long id;
 
     @OneToOne
-    @MapsId
+    @MapsId // Market의 ID를 이 엔티티의 ID로 사용
     @JoinColumn(name = "id")
     private Market market;
 

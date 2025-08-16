@@ -16,8 +16,10 @@ import java.util.List;
 public class MainPageController {
 
      // DB 상에서 있는 좋아요 1등~2등, 최신글 1등~2등, 조회수 3등~4등, 최신글 1등~2등을 가져오는 API
-     @GetMapping("/tops")
-     public ResponseEntity<MainPageDto.MainTopReqDto> getTopPosts() {
-         return null;
-     }
+//     @GetMapping("/tops")
+//     public ResponseEntity<MainPageDto.MainTopReqDto> getTopPosts() {
+//         return null;
+//     }
+
+
 }

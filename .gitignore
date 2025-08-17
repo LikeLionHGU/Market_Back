@@ -12,6 +12,9 @@ out/
 bin/
 !**/src/main/**/bin/
 !**/src/test/**/bin/
+gradle/*
+gradlew
+gradlew.bat
 
 # ====================
 # IDE & Editors

@@ -1,4 +1,4 @@
-# 기본 공통 설정
+# ?? ?? ??
 spring:
   application:
     name: market-Back
@@ -19,7 +19,7 @@ spring:
       hibernate:
         format_sql: true
         use_sql_comments: true
-        dialect: org.hibernate.dialect.MySQL8Dialect # dev 프로파일에서 H2Dialect로 덮어쓰기 됨
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
   servlet:
     multipart:
@@ -30,7 +30,7 @@ spring:
   profiles:
     active: dev
 
-  # AWS 설정
+  # AWS ??
   cloud:
     aws:
       region:
@@ -41,13 +41,13 @@ spring:
       s3:
         bucket: ${AWS_BUCKET_NAME:${AWS_BUCKET_NAME_DEFAULT}}
 
-  # Google OAuth 설정
+  # OAuth -> ???? ???? ???..
   google:
     oauth:
       client-id: ${OAUTH_GOOGLE_CLIENT_ID:${OAUTH_GOOGLE_CLIENT_ID_DEFAULT}}
       client-secret: ${OAUTH_GOOGLE_CLIENT_SECRET:${OAUTH_GOOGLE_CLIENT_SECRET_DEFAULT}}
 
-  # JWT 설정
+  # JWT ?? -> ???? ???? ???..
   external:
     jwt:
       token:
@@ -58,37 +58,32 @@ spring:
       access:
         prefix: Authorization
         secret: ${JWT_ACCESS_SECRET:${JWT_ACCESS_SECRET_DEFAULT}}
-        expiration-ms: 900000      # 15분
+        expiration-ms: 900000      # 15?
       refresh:
         prefix: refreshToken
         secret: ${JWT_REFRESH_SECRET:${JWT_REFRESH_SECRET_DEFAULT}}
-        expiration-ms: 604800000   # 7일
+        expiration-ms: 604800000   # 7?
 
-  server:
-    port: 8080
-    servlet:
-      context-path: /api  # 모든 API 요청의 기본 경로는 /api 로 시작
-    forward-headers-strategy: framework
+# Server configuration moved to top level
+server:
+  port: 8080
+  servlet:
+    context-path: /api  # ???? ?? API ?? /api ???.
+  forward-headers-strategy: framework  # https ??
 
 ---
-# dev (개발) 환경 프로파일
+# ?? ?? ??
 spring:
   config:
     import: optional:file:.env[.properties]
     activate:
       on-profile: dev
 
-  # === H2 데이터베이스 설정 (URL 수정됨) ===
-  datasource:
-    url: jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1 # <-- 이 부분이 수정되었습니다! DevTools 재시작 시 DB 유지
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
-
-  # === JPA 설정 ===
+  # ?????? ?? (????? mysql ??)
   jpa:
     hibernate:
-      ddl-auto: none # schema.sql이 스키마를 관리하므로 JPA는 자동 생성 안 함
+      ddl-auto: update
+#      ddl-auto: create-drop # ???? ERD? ?? ?? ? ???..
     defer-datasource-initialization: true
     show-sql: true
     properties:
@@ -96,29 +91,33 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
-        dialect: org.hibernate.dialect.H2Dialect # H2용 Dialect로 변경
+        dialect: org.hibernate.dialect.MySQL8Dialect
 
-  # === H2 웹 콘솔 활성화 ===
-  h2:
-    console:
-      enabled: true
-      path: /h2-console
+  datasource:
+    url: ${DB_HOST:${DB_HOST_DEFAULT}}/${DB_NAME:${DB_NAME_DEFAULT}}
+    username: ${DB_USERNAME:${DB_USERNAME_DEFAULT}}
+    password: ${DB_PASSWORD:${DB_PASSWORD_DEFAULT}}
+    driver-class-name: ${DB_CLASSNAME:${DB_CLASSNAME_DEFAULT}}
+    show-sql: true
+    defer-datasource-initialization: true
 
-  # === SQL 스크립트 실행 설정 ===
-  sql:
-    init:
-      mode: always # 항상 schema.sql, data.sql 스크립트를 실행
+  # ?? ??? ?? (?? ?? ? sql??? ?????. - ?? ??..)
+#  sql:
+#    init:
+#      mode: always
+#      data-locations:
+#        - classpath:/sql/dev-data.sql
 
-# CORS 설정
+# CORS ??
 cors:
   allowed-origins: http://localhost:3000, ${FRONTEND_DOMAIN:https://market-frontend.netlify.app}
 
-# OAuth Redirect URI 설정
+# OAuth Redirect URI -> ??? ?? ??.
 google:
   oauth:
     redirect-uri: ${REDIRECT_URI:http://localhost:8080/api/auth/callback}
 
-# 로깅 설정
+# ?? ?? (?? ?? ???? ?? ???.)
 logging:
   level:
     root: INFO
@@ -131,7 +130,7 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 
-# Actuator 엔드포인트 설정
+# ????? ?? ??.
 management:
   endpoints:
     web:
@@ -142,13 +141,13 @@ management:
       show-details: always
 
 ---
-# prod (운영) 환경 프로파일 (수정 없음)
+# docker == production mode
 spring:
   config:
     activate:
       on-profile: prod
 
-  # DB 설정 (운영 DB 사용)
+  # DB -> ??/???
   jpa:
     hibernate:
       ddl-auto: update
@@ -179,10 +178,12 @@ spring:
 cors:
   allowed-origins: http://localhost:3000, ${FRONTEND_DOMAIN:https://market-frontend.netlify.app}
 
+# OAuth -> ??? ?? ??
 google:
   oauth:
     redirect-uri: ${REDIRECT_URI}
 
+# ?? ??
 logging:
   level:
     root: INFO
@@ -193,6 +194,7 @@ logging:
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
 
+# ????
 management:
   endpoints:
     web:
@@ -205,6 +207,7 @@ management:
       probes:
         enabled: true
 
+# ?? ??
 server:
   tomcat:
     threads:

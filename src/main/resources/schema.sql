@@ -12,6 +12,7 @@ CREATE TABLE market
     food_menu_img      VARCHAR(255)          NULL,
     info               VARCHAR(255)          NULL,
     color              VARCHAR(20)           NULL,
+    category           VARCHAR(255)          NULL,
     created_date       datetime              NULL,
     last_modified_date datetime              NULL,
     CONSTRAINT pk_market PRIMARY KEY (id)
@@ -29,7 +30,7 @@ CREATE TABLE history
 
 ALTER TABLE history ADD CONSTRAINT FK_HISTORY_ON_ID FOREIGN KEY (id) REFERENCES market (id);
 
--- 새로 추가할 tmi 테이블 생성 구문
+-- tmi 테이블 생성 구문
 CREATE TABLE tmi
 (
     id                 BIGINT AUTO_INCREMENT NOT NULL,
@@ -45,5 +46,17 @@ CREATE TABLE tmi
     CONSTRAINT pk_tmi PRIMARY KEY (id)
 );
 
--- market 테이블을 참조하는 외래 키(Foreign Key) 설정
 ALTER TABLE tmi ADD CONSTRAINT FK_TMI_ON_MARKET FOREIGN KEY (market_id) REFERENCES market (id);
+
+-- (추가됨) tmi_comment 테이블 생성 구문
+CREATE TABLE tmi_comment
+(
+    id                 BIGINT AUTO_INCREMENT NOT NULL,
+    tmi_id             BIGINT                NULL,
+    content            VARCHAR(100)          NULL,
+    created_date       datetime              NULL,
+    last_modified_date datetime              NULL,
+    CONSTRAINT pk_tmicomment PRIMARY KEY (id)
+);
+
+ALTER TABLE tmi_comment ADD CONSTRAINT FK_TMICOMMENT_ON_TMI FOREIGN KEY (tmi_id) REFERENCES tmi (id);

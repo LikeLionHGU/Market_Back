@@ -1,10 +1,13 @@
 package org.example.marketback.entity.enums;
 
 public enum MarketCategory {
-    FOOD_BEVERAGE,      // 식음료
-    FASHION_ACCESSORIES, // 패션/잡화
-    AGRICULTURAL_LIVESTOCK, // 농/축산물
-    FISHERIES_SEAFOOD,  // 수산물
-    GENERAL_GOODS,      // 공산품/생활용품
+    Fish,      // 어시장
+    Parking, // 주차장
+    Food, // 음식
+    Sujebi,  // 수제비
+    Gwamegi,      // 과메기
+    DriedFish, //건어물
+    Farm, //농산물
+    Fried, //튀김 전
     ETC                 // 기타
 }

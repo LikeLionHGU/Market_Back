@@ -1,5 +1,10 @@
--- 기존 market 테이블 생성 구문
+-- 테이블이 존재하면 삭제
+DROP TABLE IF EXISTS tmi_comment;
+DROP TABLE IF EXISTS tmi;
+DROP TABLE IF EXISTS history;
 DROP TABLE IF EXISTS market;
+
+-- market 테이블 생성
 CREATE TABLE market
 (
     id                 BIGINT AUTO_INCREMENT NOT NULL,
@@ -18,11 +23,11 @@ CREATE TABLE market
     CONSTRAINT pk_market PRIMARY KEY (id)
 );
 
--- history 테이블 생성 구문
+-- history 테이블 생성
 CREATE TABLE history
 (
     id                 BIGINT NOT NULL,
-    content            VARCHAR(255) NULL,
+    content            TEXT         NULL, -- VARCHAR(255)에서 TEXT로 변경
     created_date       datetime     NULL,
     last_modified_date datetime     NULL,
     CONSTRAINT pk_history PRIMARY KEY (id)
@@ -30,13 +35,13 @@ CREATE TABLE history
 
 ALTER TABLE history ADD CONSTRAINT FK_HISTORY_ON_ID FOREIGN KEY (id) REFERENCES market (id);
 
--- tmi 테이블 생성 구문
+-- tmi 테이블 생성
 CREATE TABLE tmi
 (
     id                 BIGINT AUTO_INCREMENT NOT NULL,
     market_id          BIGINT                NULL,
     category           VARCHAR(255)          NULL,
-    content            VARCHAR(200)          NULL,
+    content            TEXT                  NULL, -- VARCHAR(200)에서 TEXT로 변경
     created_date       datetime              NULL,
     email              VARCHAR(255)          NULL,
     last_modified_date datetime              NULL,
@@ -48,7 +53,7 @@ CREATE TABLE tmi
 
 ALTER TABLE tmi ADD CONSTRAINT FK_TMI_ON_MARKET FOREIGN KEY (market_id) REFERENCES market (id);
 
--- (추가됨) tmi_comment 테이블 생성 구문
+-- tmi_comment 테이블 생성
 CREATE TABLE tmi_comment
 (
     id                 BIGINT AUTO_INCREMENT NOT NULL,

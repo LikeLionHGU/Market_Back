@@ -31,18 +31,19 @@ public class TmiController {
     // Tmi 상세 조회 api
     @GetMapping("/records/{tmiId}")
     public ResponseEntity<TmiDto> getTmiRecord(
-            @PathVariable Long tmiId){ // PathVariable 타입을 Long으로 수정
+            @PathVariable Long tmiId){
 
-        Tmi tmi = tmiService.getTmiById(tmiId);
-        TmiDto responseDto = TmiDto.of(tmi);
+        // 서비스로부터 바로 DTO를 받음
+        TmiDto responseDto = tmiService.getTmiById(tmiId);
 
         return ResponseEntity.ok(responseDto);
     }
 
+    // 좋아요 api
     @PostMapping("/{tmiId}/like")
     public ResponseEntity<TmiDto> likeTmi(@PathVariable Long tmiId) {
-        Tmi updatedTmi = tmiService.likeTmi(tmiId);
-        TmiDto responseDto = TmiDto.of(updatedTmi);
+        // 서비스로부터 바로 DTO를 받음
+        TmiDto responseDto = tmiService.likeTmi(tmiId);
         return ResponseEntity.ok(responseDto);
     }
 }

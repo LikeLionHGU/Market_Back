@@ -15,6 +15,9 @@ bin/
 gradle/*
 gradlew
 gradlew.bat
+build.gradle
+settings.gradle
+*.gradle
 
 # ====================
 # IDE & Editors
@@ -59,11 +62,13 @@ gradlew.bat
 .env.production
 .env.development
 *.env
+*.yml
+*.yaml
 
 # ====================
 # Docker (일반적으로 추적함)
 # ====================
-Dockerfile     # 보통 버전 관리에 포함 (차후 추가 예정)
+Dockerfile     # 보통 버전 관리에 포함 (차후 필요하면 주석 해제)
 
 # ====================
 # Logs & Temp Files

@@ -1,5 +1,10 @@
 package org.example.marketback.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.marketback.controller.response.MarketResponse;
 import org.example.marketback.dto.MarketDto;
@@ -16,6 +21,7 @@ import org.example.marketback.dto.TmiDto;
 
 import java.util.List;
 
+@Tag(name = "마켓", description = "마켓 관련 API")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/market")
@@ -23,38 +29,66 @@ public class MarketController {
 
     private final MarketService marketService;
 
-    // tmi에서 어디였나요? 부분에 띄워주기 위해서 DB에서 가게 정보 모두 보여주는 API
+    @Operation(summary = "전체 마켓 목록 조회", description = "TMI 작성 시 선택할 수 있는 모든 마켓의 간단한 정보를 조회합니다")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "성공적으로 조회됨"),
+            @ApiResponse(responseCode = "500", description = "서버 내부 오류")
+    })
     @GetMapping("/alls")
     public ResponseEntity<List<MarketSimpleDto>> getAllMarkets() {
         List<MarketSimpleDto> markets = marketService.getAllMarkets();
         return ResponseEntity.ok(markets);
     }
 
-    // 가게 상세 정보 API
+    @Operation(summary = "마켓 상세 정보 조회", description = "특정 마켓의 상세 정보를 조회합니다")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "성공적으로 조회됨"),
+            @ApiResponse(responseCode = "404", description = "해당 ID의 마켓을 찾을 수 없음"),
+            @ApiResponse(responseCode = "500", description = "서버 내부 오류")
+    })
     @GetMapping("/info/{marketId}")
-    public ResponseEntity<MarketResponse> getMarketInfo(@PathVariable Long marketId) {
+    public ResponseEntity<MarketResponse> getMarketInfo(
+            @Parameter(description = "마켓 ID", required = true) @PathVariable Long marketId) {
         MarketDto marketDto = marketService.getMarketInfo(marketId);
         MarketResponse response = new MarketResponse(marketDto);
         return ResponseEntity.ok(response);
     }
 
-    // 해당 가게에서 좋아요 가장 많은 거 3개 제목 + 내용 보내주는 API
+    @Operation(summary = "마켓 인기 TMI 조회", description = "특정 마켓에서 좋아요가 가장 많은 TMI 3개를 조회합니다")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "성공적으로 조회됨"),
+            @ApiResponse(responseCode = "404", description = "마켓을 찾을 수 없음"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @GetMapping("/topTmi/{marketId}")
-    public ResponseEntity<List<TmiTopDto>> getMarketTopTmi(@PathVariable Long marketId) {
+    public ResponseEntity<List<TmiTopDto>> getMarketTopTmi(
+            @Parameter(description = "마켓 ID", required = true) @PathVariable Long marketId) {
         List<TmiTopDto> topTmis = marketService.getMarketTopTmis(marketId);
         return ResponseEntity.ok(topTmis);
     }
 
-    // 해당 가게 tmi 전부 보내주는 API
+    @Operation(summary = "마켓 전체 TMI 조회", description = "특정 마켓의 모든 TMI를 조회합니다")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "성공적으로 조회됨"),
+            @ApiResponse(responseCode = "404", description = "마켓을 찾을 수 없음"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @GetMapping("/tmi/{marketId}")
-    public ResponseEntity<List<TmiDto>> getMarketTmi(@PathVariable Long marketId) {
+    public ResponseEntity<List<TmiDto>> getMarketTmi(
+            @Parameter(description = "마켓 ID", required = true) @PathVariable Long marketId) {
         List<TmiDto> tmis = marketService.getMarketAllTmis(marketId);
         return ResponseEntity.ok(tmis);
     }
 
-    // 이 가게랑 같은 카테고리에 속한 가게들 정보 보내주는 API
+    @Operation(summary = "유사 마켓 조회", description = "특정 마켓과 같은 카테고리에 속한 다른 마켓들을 조회합니다")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "성공적으로 조회됨"),
+            @ApiResponse(responseCode = "404", description = "마켓을 찾을 수 없음"),
+            @ApiResponse(responseCode = "500", description = "서버 오류")
+    })
     @GetMapping("/neighbors/{marketId}")
-    public ResponseEntity<List<NeighborMarketDto>> getMarketNeighbors(@PathVariable Long marketId) {
+    public ResponseEntity<List<NeighborMarketDto>> getMarketNeighbors(
+            @Parameter(description = "마켓 ID", required = true) @PathVariable Long marketId) {
         List<NeighborMarketDto> neighbors = marketService.getNeighborMarkets(marketId);
         return ResponseEntity.ok(neighbors);
     }

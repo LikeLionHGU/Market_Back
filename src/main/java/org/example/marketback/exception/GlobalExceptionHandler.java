@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
+import org.springframework.web.servlet.resource.NoResourceFoundException;
 
 import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
@@ -63,15 +64,30 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(status).body(body);
     }
 
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ExceptionResponse> handleAllUncaughtException(Exception ex) {
-        HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+    @ExceptionHandler(NoResourceFoundException.class)
+    public ResponseEntity<ExceptionResponse> handleNoResourceFoundException(NoResourceFoundException ex) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
 
         ExceptionResponse body = ExceptionResponse.builder()
                 .timestamp(LocalDateTime.now())
                 .status(status.value())
                 .error(status.getReasonPhrase())
-                .message("Internal Server Error")
+                .message("Resource not found")
+                .build();
+
+        return ResponseEntity.status(status).body(body);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<ExceptionResponse> handleAllUncaughtException(Exception ex) {
+        HttpStatus status = resolveHttpStatus(ex);
+        String message = extractMessage(ex);
+
+        ExceptionResponse body = ExceptionResponse.builder()
+                .timestamp(LocalDateTime.now())
+                .status(status.value())
+                .error(status.getReasonPhrase())
+                .message(message)
                 .build();
 
         return ResponseEntity.status(status).body(body);
@@ -93,12 +109,24 @@ public class GlobalExceptionHandler {
             return HttpStatus.BAD_REQUEST;
         }
 
-        if (ex instanceof NoAuthenticatedException) {
+        if (ex instanceof NoAuthenticatedException || ex instanceof InvalidTokenException) {
+            return HttpStatus.UNAUTHORIZED;
+        }
+
+        if (ex instanceof NoAuthorizationException || ex instanceof UnauthorizedAccessException) {
             return HttpStatus.FORBIDDEN;
         }
 
         if (ex instanceof AccessDeniedException) {
             return HttpStatus.FORBIDDEN;
+        }
+
+        if (ex instanceof NotFoundException) {
+            return HttpStatus.NOT_FOUND;
+        }
+
+        if (ex instanceof DuplicateEntityException || ex instanceof DuplicateTagCodeException || ex instanceof AlreadyExistException) {
+            return HttpStatus.CONFLICT;
         }
 
         if (ex instanceof HttpRequestMethodNotSupportedException) {
@@ -107,6 +135,10 @@ public class GlobalExceptionHandler {
 
         if (ex instanceof MaxUploadSizeExceededException) {
             return HttpStatus.PAYLOAD_TOO_LARGE;
+        }
+
+        if (ex instanceof DataUpdateException || ex instanceof UploadNotificationException || ex instanceof PresignedUrlCreationException) {
+            return HttpStatus.INTERNAL_SERVER_ERROR;
         }
 
         return HttpStatus.INTERNAL_SERVER_ERROR;

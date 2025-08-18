@@ -13,13 +13,13 @@ public class AiSummaryService {
 
     private final ChatClient chatClient;
 
-    // application.yml의 OpenAI 설정으로 ChatClient가 자동 구성되어 주입됩니다.
+    // application.yml의 AI 설정(이제 Gemini)으로 ChatClient가 자동 구성되어 주입됩니다.
     public AiSummaryService(ChatClient.Builder chatClientBuilder) {
         this.chatClient = chatClientBuilder.build();
     }
 
     public String summarize(String marketName, String tmiContent) {
-        // AI에게 역할을 부여하고, 원하는 결과물의 형식을 지정해주는 '프롬프트'
+        // 프롬프트는 Gemini에서도 잘 동작하므로 수정할 필요가 없습니다.
         String promptText = """
                 당신은 전통시장 홍보 플랫폼의 콘텐츠 관리자입니다.
                 '{marketName}' 가게에 대해 어제 하루 동안 사람들이 남긴 다양한 이야기(TMI)들이 아래에 있습니다.
@@ -34,10 +34,9 @@ public class AiSummaryService {
         PromptTemplate promptTemplate = new PromptTemplate(promptText);
         Prompt prompt = promptTemplate.create(Map.of("marketName", marketName, "tmiContent", tmiContent));
 
-        // AI API 호출
-        //ChatResponse response = chatClient.call(prompt);
-        // AI가 생성한 텍스트 결과만 추출하여 반환
-        //return response.getResult().getOutput().getContent();
-        return "hi";
+        // 이 코드는 이제 OpenAI가 아닌 Gemini API를 호출하게 됩니다.
+        return chatClient.prompt(prompt)
+                .call()
+                .content();
     }
 }

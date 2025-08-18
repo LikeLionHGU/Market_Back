@@ -7,8 +7,8 @@ VALUES ('포항대게',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/imgi_4_+(2).jpg',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/Group+73.png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/imgi_4_+(1).png',
-        'null',
-        '#80ABBE','Fish', NOW(), NOW());
+        NULL
+        ,'#387D9E','Fish', NOW(), NOW());
 
 INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
 VALUES ('대화식당',
@@ -18,8 +18,8 @@ VALUES ('대화식당',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/imgi_4_+(2).png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/Group+69.png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+146.png',
-        'null',
-        '#F2712E', 'Food', NOW(), NOW());
+        NULL
+        ,'#EF5302', 'Food', NOW(), NOW());
 
 INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
 VALUES ('옥수수',
@@ -29,19 +29,119 @@ VALUES ('옥수수',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/imgi_4_+(2).png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/Group+79.png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+147.png',
-        'null',
-        'null', 'Sujebi', NOW(), NOW());
+        NULL
+        ,'#F5C002', 'Sujebi', NOW(), NOW());
 
 INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
 VALUES ('죽도어시장 공영주차장',
-        'null',
+        NULL,
         '포항시 북구 해동로 193',
         '월~일 07:00 – 22:00',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/imgi_4_+(2).png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/Group+81.png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+148.png',
         '30분 700원 / 1시간 1,300원',
-        '#725E51', 'Parking', NOW(), NOW());
+        '#3E2214', 'Parking', NOW(), NOW());
+
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+VALUES ('영광회대게센타',
+        NULL,
+        NULL,
+        NULL,
+        'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/imgi_1_e98fde87e7ac2e1c1294e50823b68734_1598238147_0008+1.png',
+        NULL,
+        NULL,
+        NULL,
+        NULL, 'Fish', NOW(), NOW());
+
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+VALUES ('승리회맛집',
+        NULL,
+        NULL,
+        NULL,
+        'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+146.png',
+        NULL,
+        NULL,
+        NULL,
+        NULL, 'Fish', NOW(), NOW());
+
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+VALUES ('동양횟집',
+        NULL,
+        NULL,
+        NULL,
+        'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+150.png',
+        NULL,
+        NULL,
+        NULL,
+        NULL, 'Fish', NOW(), NOW());
+
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+VALUES ('장기식당',
+        NULL,
+        NULL,
+        NULL,
+        'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/imgi_1_e98fde87e7ac2e1c1294e50823b68734_1598238147_0008+1.png',
+        NULL,
+        NULL,
+        NULL,
+        NULL, 'Food', NOW(), NOW());
+
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+VALUES ('죽도포포',
+        NULL,
+        NULL,
+        NULL,
+        'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+146.png',
+        NULL,
+        NULL,
+        NULL,
+        NULL, 'Food', NOW(), NOW());
+
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+VALUES ('부산밀면',
+        NULL,
+        NULL,
+        NULL,
+        'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+151.png',
+        NULL,
+        NULL,
+        NULL,
+        NULL, 'Food', NOW(), NOW());
+
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+VALUES ('밀밭분식',
+        NULL,
+        NULL,
+        NULL,
+        'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/imgi_1_e98fde87e7ac2e1c1294e50823b68734_1598238147_0008+1.png',
+        NULL,
+        NULL,
+        NULL,
+        NULL,'Sujebi', NOW(), NOW());
+
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+VALUES ('가족식당',
+        NULL,
+        NULL,
+        NULL,
+        'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+146.png',
+        NULL,
+        NULL,
+        NULL,
+        NULL, 'Sujebi', NOW(), NOW());
+
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+VALUES ('진분식',
+        NULL,
+        NULL,
+        NULL,
+        'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+151.png',
+        NULL,
+        NULL,
+        NULL,
+        NULL, 'Sujebi', NOW(), NOW());
+
 
 -- (추가됨) history 샘플 데이터 삽입
 INSERT INTO history (id, content, created_date, last_modified_date)

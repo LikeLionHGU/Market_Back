@@ -46,14 +46,19 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-actuator'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+
+
+
     // ===== API 문서 & AI =====
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'  // Spring Boot 3.5.4 안정 호환 버전
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'  // 버전 업데이트
     implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
 
     // ===== AWS S3 =====
     implementation 'io.awspring.cloud:spring-cloud-aws-starter-s3:3.0.1'  // S3만 사용
+    implementation 'com.amazonaws:aws-java-sdk-s3:1.12.767'
 
     // ===== 데이터베이스 =====
+    runtimeOnly 'com.h2database:h2' // H2 데이터베이스 추가
     runtimeOnly 'com.mysql:mysql-connector-j'
     // MyBatis
     implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'

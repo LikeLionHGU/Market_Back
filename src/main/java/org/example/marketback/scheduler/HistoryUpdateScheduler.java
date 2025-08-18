@@ -39,6 +39,10 @@ public class HistoryUpdateScheduler {
         LocalDateTime startOfYesterday = yesterday.atStartOfDay(); // 어제 00:00:00
         LocalDateTime endOfYesterday = yesterday.atTime(23, 59, 59); // 어제 23:59:59
 
+        //이건 테스트용
+        LocalDateTime startOfRange = LocalDate.now().minusDays(1).atStartOfDay(); // 어제 00:00:00
+        LocalDateTime endOfRange = LocalDateTime.now();
+
         // 2. 모든 마켓 정보를 가져옴
         List<Market> allMarkets = marketRepository.findAll();
 

@@ -21,12 +21,8 @@ public class TmiDto {
     private String email;
     private Long likes;
     private Long views;
-
-    // Market 엔티티 전체 대신 ID와 이름만 포함하여 순환 참조 방지
     private Long marketId;
     private String marketName;
-
-    // TmiComment 엔티티 리스트 대신 TmiCommentDto 리스트를 사용
     private List<TmiCommentDto> tmiCommentList;
 
     /**

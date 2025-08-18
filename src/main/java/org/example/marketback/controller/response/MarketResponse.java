@@ -24,7 +24,7 @@ public class MarketResponse {
     private String info;
     private String color;
     private String history;
-    private List<TmiDto> tmiList; // <-- 이 필드를 추가하세요!
+    private List<TmiDto> tmiList;
 
 
     public MarketResponse(MarketDto marketDto) {

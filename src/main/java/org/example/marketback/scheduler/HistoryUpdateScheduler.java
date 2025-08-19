@@ -31,7 +31,7 @@ public class HistoryUpdateScheduler {
     @Scheduled(cron = "0 06 20 * * *", zone = "Asia/Seoul")
     @Transactional
     public void updateHistoriesWithTmiSummaries() {
-        log.info("AI 기반 일일 히스토리 업데이트 작업을 시작합니다...");
+        log.info("AI 기반 일일 히스토리 업데이트 작업을 시작합니다..");
 
         LocalDateTime startOfRange = LocalDate.now().minusDays(1).atStartOfDay();
         LocalDateTime endOfRange = LocalDateTime.now();

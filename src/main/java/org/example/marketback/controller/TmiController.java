@@ -10,10 +10,13 @@ import lombok.RequiredArgsConstructor;
 import org.example.marketback.controller.request.TmiCreateRequest;
 import org.example.marketback.dto.TmiDto;
 import org.example.marketback.entity.Tmi;
+import org.example.marketback.entity.enums.Category;
 import org.example.marketback.service.TmiService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Tag(name = "TMI", description = "TMI 게시글 관련 API")
 @RestController
@@ -68,5 +71,23 @@ public class TmiController {
         // 서비스로부터 바로 DTO를 받음
         TmiDto responseDto = tmiService.likeTmi(tmiId);
         return ResponseEntity.ok(responseDto);
+    }
+
+    @Operation(summary = "특정 마켓의 카테고리별 TMI 목록 조회", description = "특정 마켓에 속한 TMI 게시글을 카테고리별로 조회합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "성공적으로 조회됨"),
+            @ApiResponse(responseCode = "400", description = "잘못된 카테고리 값"),
+            @ApiResponse(responseCode = "404", description = "마켓을 찾을 수 없음"),
+            @ApiResponse(responseCode = "500", description = "서버 내부 오류")
+    })
+    // URL 경로를 수정하여 marketId를 받도록 변경
+    @GetMapping("/market/{marketId}/category/{category}")
+    public ResponseEntity<List<TmiDto>> getTmisByMarketAndCategory(
+            @Parameter(description = "마켓 ID", required = true) @PathVariable Long marketId,
+            @Parameter(description = "조회할 카테고리 (전체, 썰, 팁, 리뷰 등)", required = true) @PathVariable Category category) {
+
+        // 수정된 서비스 메소드 호출
+        List<TmiDto> responseDtos = tmiService.getTmisByMarketAndCategory(marketId, category);
+        return ResponseEntity.ok(responseDtos);
     }
 }

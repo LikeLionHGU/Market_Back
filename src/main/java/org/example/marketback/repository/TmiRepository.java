@@ -2,6 +2,7 @@ package org.example.marketback.repository;
 
 import org.example.marketback.entity.Market;
 import org.example.marketback.entity.Tmi;
+import org.example.marketback.entity.enums.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +19,8 @@ public interface TmiRepository extends JpaRepository<Tmi, Long> {
     List<Tmi> findTop2ByOrderByLikesDesc();
     List<Tmi> findTop2ByOrderByViewsDesc();
     List<Tmi> findTop2ByOrderByCreatedDateDesc();
+    List<Tmi> findByCategory(Category category);
+    List<Tmi> findByMarketAndCategory(Market market, Category category);
 
     // --- 히스토리 업데이트를 위한 쿼리 메소드 추가 ---
     // 특정 마켓에 대해, 어제 하루 동안 작성된 모든 TMI를 조회

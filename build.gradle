@@ -47,7 +47,7 @@ dependencies {
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
     // ===== API 문서 & AI =====
-    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'  // 버전 업데이트
+    implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.7.0'  // Spring Boot 3.5.4 안정 호환 버전
     implementation 'org.springframework.ai:spring-ai-openai-spring-boot-starter'
 
     // ===== AWS S3 =====

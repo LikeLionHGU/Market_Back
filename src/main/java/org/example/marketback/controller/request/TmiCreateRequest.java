@@ -19,6 +19,8 @@ public class TmiCreateRequest {
     @NotBlank(message = "내용을 입력해주세요.")
     private String content;
 
+    private String email;
+
     @NotNull(message = "카테고리는 필수입니다.")
     private Category category;
 }

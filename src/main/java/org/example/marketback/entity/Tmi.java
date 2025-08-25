@@ -19,7 +19,7 @@ public class Tmi extends Base {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String title;
-    @Column(length = 200)
+    @Column(length = 400)
     private String content;
     @Enumerated(EnumType.STRING) // <-- 이 어노테이션을 추가하세요!
     private Category category;  // todo: add category enum

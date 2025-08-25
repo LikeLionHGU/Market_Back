@@ -27,6 +27,7 @@ public class Market extends Base {
     private String foodMenuImg;
     private String info; // 공영주차장을 위한 것
     private String color;
+    private String chipColor;
     
     @Enumerated(EnumType.STRING) // <-- 이 어노테이션을 추가하세요!
     private MarketCategory category;  // todo: add category enum

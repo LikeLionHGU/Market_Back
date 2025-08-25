@@ -24,6 +24,7 @@ public class MarketResponse {
     private String info;
     private String color;
     private String history;
+    private String chipColor;
     private List<TmiDto> tmiList;
 
 
@@ -39,6 +40,7 @@ public class MarketResponse {
         this.foodMenuImg = marketDto.getFoodMenuImg();
         this.color = marketDto.getColor();
         this.history = marketDto.getHistory();
+        this.chipColor = marketDto.getChipColor();
         this.tmiList = marketDto.getTmiList(); // <-- 생성자에서 값을 매핑하세요!
     }
 }

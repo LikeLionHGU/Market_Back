@@ -22,6 +22,7 @@ public class MarketDto {
     private String foodMenuImg;
     private String history;
     private String color;
+    private String chipColor;
     private List<TmiDto> tmiList;
 
     public static MarketDto of(Market market) {
@@ -45,6 +46,7 @@ public class MarketDto {
                 .info(market.getInfo())
                 .foodMenuImg(market.getFoodMenuImg()) // <-- 누락되었던 필드 추가
                 .color(market.getColor())
+                .chipColor(market.getChipColor())
                 .history(historyContent)
                 .tmiList(tmiDtos)
                 .build();

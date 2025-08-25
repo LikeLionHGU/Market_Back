@@ -28,7 +28,7 @@ public class HistoryUpdateScheduler {
     private final HistoryRepository historyRepository;
     private final AiSummaryService aiSummaryService;
 
-    @Scheduled(cron = "0 06 20 * * *", zone = "Asia/Seoul")
+    @Scheduled(cron = "0 30 0 * * *", zone = "Asia/Seoul")
     @Transactional
     public void updateHistoriesWithTmiSummaries() {
         log.info("AI 기반 일일 히스토리 업데이트 작업을 시작합니다..");

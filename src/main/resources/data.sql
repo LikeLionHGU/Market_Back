@@ -1,5 +1,5 @@
 -- market 샘플 데이터 삽입
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color, category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color, category, created_date, last_modified_date, chipColor)
 VALUES ('포항대게',
         '054-246-3739',
         '포항시 북구 칠성로 68',
@@ -8,9 +8,9 @@ VALUES ('포항대게',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/Group+73.png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/daege.png',
         NULL
-        ,'#387D9E','Fish', NOW(), NOW());
+        ,'#387D9E','Fish', NOW(), NOW(), '#80ABBE');
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('대화식당',
         '054-241-5955',
         '포항시 북구 죽도시장 11길 6-7',
@@ -19,9 +19,9 @@ VALUES ('대화식당',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/Group+69.png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/daehwa2.png',
         NULL
-        ,'#EF5302', 'Food', NOW(), NOW());
+        ,'#EF5302', 'Food', NOW(), NOW(), '#F2712E');
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('옥수수',
         '0502-5550-9830',
         '포항시 북구 죽도시장 11길 3',
@@ -30,9 +30,9 @@ VALUES ('옥수수',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/Group+79.png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+147.png',
         NULL
-        ,'#F5C002', 'Sujebi', NOW(), NOW());
+        ,'#F5C002', 'Sujebi', NOW(), NOW(), '#F5C002');
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('죽도어시장 공영주차장',
         NULL,
         '포항시 북구 해동로 193',
@@ -41,9 +41,9 @@ VALUES ('죽도어시장 공영주차장',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/Group+81.png',
         'https://market-summer-back.s3.ap-southeast-2.amazonaws.com/image+148.png',
         '30분 700원 / 1시간 1,300원',
-        '#3E2214', 'Parking', NOW(), NOW());
+        '#3E2214', 'Parking', NOW(), NOW(), '#725E51');
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('영광회대게센타',
         NULL,
         NULL,
@@ -52,9 +52,9 @@ VALUES ('영광회대게센타',
         NULL,
         NULL,
         NULL,
-        NULL, 'Fish', NOW(), NOW());
+        NULL, 'Fish', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('승리회맛집',
         NULL,
         NULL,
@@ -63,9 +63,9 @@ VALUES ('승리회맛집',
         NULL,
         NULL,
         NULL,
-        NULL, 'Fish', NOW(), NOW());
+        NULL, 'Fish', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('동양횟집',
         NULL,
         NULL,
@@ -74,9 +74,9 @@ VALUES ('동양횟집',
         NULL,
         NULL,
         NULL,
-        NULL, 'Fish', NOW(), NOW());
+        NULL, 'Fish', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('장기식당',
         NULL,
         NULL,
@@ -85,9 +85,9 @@ VALUES ('장기식당',
         NULL,
         NULL,
         NULL,
-        NULL, 'Food', NOW(), NOW());
+        NULL, 'Food', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('죽도포포',
         NULL,
         NULL,
@@ -96,9 +96,9 @@ VALUES ('죽도포포',
         NULL,
         NULL,
         NULL,
-        NULL, 'Food', NOW(), NOW());
+        NULL, 'Food', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('부산밀면',
         NULL,
         NULL,
@@ -107,9 +107,9 @@ VALUES ('부산밀면',
         NULL,
         NULL,
         NULL,
-        NULL, 'Food', NOW(), NOW());
+        NULL, 'Food', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('밀밭분식',
         NULL,
         NULL,
@@ -118,9 +118,9 @@ VALUES ('밀밭분식',
         NULL,
         NULL,
         NULL,
-        NULL,'Sujebi', NOW(), NOW());
+        NULL,'Sujebi', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('가족식당',
         NULL,
         NULL,
@@ -129,9 +129,9 @@ VALUES ('가족식당',
         NULL,
         NULL,
         NULL,
-        NULL, 'Sujebi', NOW(), NOW());
+        NULL, 'Sujebi', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('진분식',
         NULL,
         NULL,
@@ -140,9 +140,9 @@ VALUES ('진분식',
         NULL,
         NULL,
         NULL,
-        NULL, 'Sujebi', NOW(), NOW());
+        NULL, 'Sujebi', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('죽도시장 공영주차장',
         NULL,
         NULL,
@@ -151,9 +151,9 @@ VALUES ('죽도시장 공영주차장',
         NULL,
         NULL,
         NULL,
-        NULL, 'Parking', NOW(), NOW());
+        NULL, 'Parking', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('포원청과',
         NULL,
         NULL,
@@ -162,9 +162,9 @@ VALUES ('포원청과',
         NULL,
         NULL,
         NULL,
-        NULL, 'Parking', NOW(), NOW());
+        NULL, 'Parking', NOW(), NOW(), NULL);
 
-INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date)
+INSERT INTO market (name, phone_number, address, open_time, market_img, market_logo, food_menu_img, info, color,category, created_date, last_modified_date, chipColor)
 VALUES ('태성청과',
         NULL,
         NULL,
@@ -173,7 +173,7 @@ VALUES ('태성청과',
         NULL,
         NULL,
         NULL,
-        NULL, 'Parking', NOW(), NOW());
+        NULL, 'Parking', NOW(), NOW()), NULL;
 
 -- (추가됨) history 샘플 데이터 삽입
 INSERT INTO history (id, content, created_date, last_modified_date)
